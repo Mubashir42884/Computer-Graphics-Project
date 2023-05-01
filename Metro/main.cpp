@@ -440,6 +440,7 @@ void display(void)
 	glVertex3f(5.0, 5.0, 0.0);
     glVertex3f(5.0, 0.0, 0.0);
 
+    // Back buildings
     glColor3f (0.31, 0.09, 0.48);
 	glVertex3f(5.0, 3.0, 0.0);
 	glVertex3f(6.0, 3.0, 0.0);
@@ -452,6 +453,7 @@ void display(void)
 	glVertex3f(11.0, 8.0, 0.0);
     glVertex3f(11.0, 0.0, 0.0);
 
+    // Back buildings
     glColor3f (0.31, 0.09, 0.48);
 	glVertex3f(11.0, 0.0, 0.0);
 	glVertex3f(11.0, 4.5, 0.0);
@@ -464,6 +466,7 @@ void display(void)
 	glVertex3f(16.0, 6.0, 0.0);
     glVertex3f(16.0, 0.0, 0.0);
 
+    // Back buildings
     glColor3f (0.31, 0.09, 0.48);
 	glVertex3f(16.0, 0.0, 0.0);
 	glVertex3f(16.0, 3.5, 0.0);
@@ -476,6 +479,7 @@ void display(void)
 	glVertex3f(21.0, 7.0, 0.0);
     glVertex3f(21.0, 0.0, 0.0);
 
+    // Back buildings
     glColor3f (0.31, 0.09, 0.48);
 	glVertex3f(21.0, 0.0, 0.0);
 	glVertex3f(21.0, 5.75, 0.0);
@@ -488,6 +492,7 @@ void display(void)
 	glVertex3f(26.0, 5.0, 0.0);
     glVertex3f(26.0, 0.0, 0.0);
 
+    // Back buildings
     glColor3f (0.31, 0.09, 0.48);
 	glVertex3f(26.0, 0.0, 0.0);
 	glVertex3f(26.0, 3.25, 0.0);
@@ -505,6 +510,7 @@ void display(void)
 	glVertex3f(30, 8.75, 0.0);
     glVertex3f(30.75, 8.0, 0.0);
 
+    // Metro Pillar
     glColor3f (0.329, 0.329, 0.329);
 	glVertex3f(24.5, 5.0, 0.0);
 	glVertex3f(24.5, 7.0, 0.0);
@@ -556,12 +562,14 @@ void display(void)
 	glVertex3f(32, 11.85, 0.0);
     glVertex3f(32, 11.75, 0.0);
 
+    // Back Building
     glColor3f (0.31, 0.09, 0.48);
 	glVertex3f(31.0, 0.0, 0.0);
 	glVertex3f(31.0, 6, 0.0);
 	glVertex3f(32.0, 6, 0.0);
     glVertex3f(32.0, 0.0, 0.0);
 
+    // 1st building from left glasses
     glColor3f (0.89, 1, 0.83);
     glVertex3f(0.25, 0.25, 0.0);
 	glVertex3f(0.25, 1.75, 0.0);
@@ -627,6 +635,7 @@ void display(void)
 	glVertex3f(0.25, 2.75, 0.0);
 	glVertex3f(4.75, 2.75, 0.0);
     glVertex3f(4.75, 2, 0.0);
+    //---------------------------------//
 
     glEnd();
     // buildings end
@@ -1095,14 +1104,15 @@ void handleKeypress(unsigned char key, int x, int y)
         break;
 
         case 'm':
+        glClearColor(1,1,0,1.0);
         morning_rain = true;
         day_rain = false;
         night = false;
 
-        Morning(_mor);
+        //Morning(_mor);
 
         sun(true);
-        glClearColor(1,1,0,1.0);
+
         break;
 
         case 'k':
