@@ -52,7 +52,7 @@ void update2(int value){
 //-------------Mubashir
 void update4(int value)
 {
-    if(position4 > 5)
+    if(position4 > 8)
         position4 = -30.0;
         position4 += speed3;
         glutPostRedisplay();
@@ -62,7 +62,7 @@ void update4(int value)
 void update5(int value)
 {
     if(position5 > 5)
-        position5 = -30.0;
+        position5 = -20.0;
         position5 += speed3;
         glutPostRedisplay();
         glutTimerFunc(100, update5, 1);
@@ -433,7 +433,7 @@ void display(void)
 	glVertex3f(30, 8.75, 0.0);
     glVertex3f(30.75, 8.0, 0.0);
 
-    glColor3f (0, 0, 0);
+    glColor3f (0.329, 0.329, 0.329);
 	glVertex3f(24.5, 5.0, 0.0);
 	glVertex3f(24.5, 7.0, 0.0);
 	glVertex3f(25.5, 7.0, 0.0);
@@ -842,9 +842,10 @@ if(night){
 
     glClearColor(0.00, 0.11, 0.36, 1.0);
     glutTimerFunc(8, Night, 0);
-    //batman
+
+    ///Owlman
     glBegin(GL_QUADS);
-    glColor3f (1, 1, 0);
+    glColor4f (1, 0.984, 0.102, 0.2);
 	glVertex3f(29.25, 8.5, 0.0);
 	glVertex3f(30, 8.75, 0.0);
 	glVertex3f(27.5, 15, 0.0);
@@ -852,7 +853,7 @@ if(night){
     glEnd();
 	float theta;
     glBegin(GL_POLYGON);
-    glColor3f(1, 1, 0);
+    glColor4f(1, 0.984, 0.102, 0.6);
     for(int i=0; i<360; i++)
     {
     theta = i*PI/180;
@@ -867,7 +868,7 @@ if(night){
 
 
     //-------------Bishakh
-    /// Batsignal logo
+    /// Owl signal logo
     glColor3f (0, 0, 0);
 	glVertex3f(26.0, 16, 0.0);
 	glVertex3f(26.25, 16.25, 0.0);
