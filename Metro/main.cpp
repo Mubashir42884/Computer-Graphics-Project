@@ -29,6 +29,11 @@ GLfloat bird_y = 14.0f;
 
 GLfloat rainday = false;
 GLfloat night = false;
+GLfloat morning_rain = false;
+GLfloat day_rain = false;
+
+
+
 
 void update(int value)
 {
@@ -57,7 +62,7 @@ void update2(int value){
 //-------------Mubashir
 void update4(int value)
 {
-    if(position4 > 8)
+    if(position4 > 10)
         position4 = -30.0;
         position4 += speed3;
         glutPostRedisplay();
@@ -66,7 +71,7 @@ void update4(int value)
 
 void update5(int value)
 {
-    if(position5 > 5)
+    if(position5 > 30)
         position5 = -20.0;
         position5 += speed3;
         glutPostRedisplay();
@@ -97,7 +102,6 @@ void sun(bool sunny){
         ///Conditions for sun
 
         if(!night && !rainday){
-            glClearColor (0.77, 0.95, 1.00, 1.0);
             glPushMatrix();
             glTranslatef(7.0f, 15.0f, 0.0f);
             GLfloat radius = 2.0f;
@@ -200,12 +204,11 @@ void myCars(float l, float r,float t, float b, int rr1, int gg1, int bb1, int rr
 void drawTree(float x, float y, float height) {
     glColor3f(0.0, 0.5, 0.0); // set color to green
     glBegin(GL_TRIANGLES);
-    glVertex2f(x + height/2, y + height);
-    glVertex2f(x, y);
-    glVertex2f(x - height/2, y + height);
+    glVertex2f(x, y + height);
+    glVertex2f(x - height/2, y );
+    glVertex2f(x + height/2, y );
 
     glEnd();
-
 
     glColor3f(0.6, 0.3, 0.0); // set color to brown
     glBegin(GL_POLYGON);
@@ -1005,15 +1008,22 @@ void Rain(int rainy){
 if(rainday){
 
     sun(false);
-    moon(false);
-    Night(false);
 
     _rain += 0.001f;
+
+
 
     glBegin(GL_POINTS);
     for(int i=1;i<=70;i++)
     {
-        glClearColor(0.10, 0.15, 0.23, 1.0);
+        if(day_rain == true){
+            glClearColor (0.259, 0.569, 0.8, 0.82);
+        }
+
+        if(morning_rain == true ){
+            glClearColor (0.839, 0.596, 0.42, 0.82);
+        }
+
         int x=rand(),y=rand();
         x%=32; y%=18;
         glBegin(GL_LINES);
@@ -1050,7 +1060,6 @@ void handleKeypress(unsigned char key, int x, int y)
         case 'r':
         rainday = true;
         Rain(_rain);
-        night = false;
         break;
 
         case 't':
@@ -1059,15 +1068,30 @@ void handleKeypress(unsigned char key, int x, int y)
         break;
 
         case 'n':
+        day_rain=false;
+        morning_rain=false;
         night = true;
         Night(_nt);
-        rainday = false;
+        break;
+
+        case 'd':
+        day_rain = true;
+        morning_rain= false;
+        night = false;
+        sun(true);
+        glClearColor (0.77, 0.95, 1.00, 1.0);
         break;
 
         case 'm':
-        rainday = false;
+        morning_rain = true;
+        day_rain = false;
         night = false;
+
         Morning(_mor);
+
+        sun(true);
+        glClearColor(1,1,0,1.0);
+
         break;
 
 
@@ -1126,7 +1150,8 @@ int main(int argc, char** argv)
     cout << "Press T : For Stopping Rain" << endl << endl;
 
     cout << "Press N : For Night " << endl << endl;
-    cout << "Press M : For Day" << endl << endl;
+    cout << "Press D : For Day" << endl << endl;
+    cout << "Press M : For Morning" << endl << endl;
 
     cout << "Press LEFT Button on Mouse : For Increase Car Speed" << endl << endl;
     cout << "Press RIGHT Button on Mouse : For Decrease Car Speed" << endl << endl;
