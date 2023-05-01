@@ -5,6 +5,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
+#include <Windows.h>
+#include <MMSystem.h>
 #define PI 3.14
 
 using namespace std;
@@ -23,12 +25,14 @@ GLfloat speed9 = 1.2;
 GLfloat _rain = 0.0;
 GLfloat _nt = 0.0;
 GLfloat _mor = 0.0;
+GLfloat _surp = 0.0;
 GLfloat bird_y = 14.0f;
 
 
 
 GLfloat rainday = false;
 GLfloat night = false;
+GLfloat surprising = false;
 GLfloat morning_rain = false;
 GLfloat day_rain = false;
 
@@ -1039,6 +1043,14 @@ if(rainday){
     glFlush();
 }
 }
+
+void Surprise(int surp){
+    if(surprising){
+        sndPlaySound("Surprise.wav", SND_ASYNC);
+    }
+
+
+}
 //-------------Bishakh
 
 
@@ -1091,7 +1103,11 @@ void handleKeypress(unsigned char key, int x, int y)
 
         sun(true);
         glClearColor(1,1,0,1.0);
+        break;
 
+        case 'k':
+        surprising = true;
+        Surprise(_surp);
         break;
 
 
@@ -1152,6 +1168,8 @@ int main(int argc, char** argv)
     cout << "Press N : For Night " << endl << endl;
     cout << "Press D : For Day" << endl << endl;
     cout << "Press M : For Morning" << endl << endl;
+
+    cout << "Press K : For Surprise" << endl << endl;
 
     cout << "Press LEFT Button on Mouse : For Increase Car Speed" << endl << endl;
     cout << "Press RIGHT Button on Mouse : For Decrease Car Speed" << endl << endl;
