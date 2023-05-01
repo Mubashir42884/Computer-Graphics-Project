@@ -16,10 +16,15 @@ GLfloat speed1 = 0.4;
 GLfloat position2 = 0.0;
 GLfloat position4 = 0.0;
 GLfloat position5 = 0.0;
+GLfloat position6 = 0.0;
 GLfloat speed2 = 0.3;
 GLfloat speed3 = 0.8;
+GLfloat speed9 = 1.2;
 GLfloat _rain = 0.0;
 GLfloat _nt = 0.0;
+GLfloat _mor = 0.0;
+GLfloat bird_y = 14.0f;
+
 
 
 GLfloat rainday = false;
@@ -67,6 +72,22 @@ void update5(int value)
         glutPostRedisplay();
         glutTimerFunc(100, update5, 1);
 }
+
+void update6(int value) {
+    if (position6 > 30) {
+        position6 = -9.0;
+    }
+    position6 += speed9;
+    glutPostRedisplay();
+    glutTimerFunc(100, update6, 1);
+
+    // compute the current time
+    float time = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
+
+    // update the bird's y position
+    bird_y += 0.1f * sin(time);
+}
+
 //-------------Mubashir
 
 
@@ -175,7 +196,7 @@ void myCars(float l, float r,float t, float b, int rr1, int gg1, int bb1, int rr
     wheel(car_right-0.4, car_bottom);
 }
 
-/// Trees
+/// Drawing Trees
 void drawTree(float x, float y, float height) {
     glColor3f(0.0, 0.5, 0.0); // set color to green
     glBegin(GL_TRIANGLES);
@@ -194,6 +215,53 @@ void drawTree(float x, float y, float height) {
     glVertex2f(x - height/12, y - height/2);
     glEnd();
 }
+
+
+/// Drawing Birds
+void bird(float x, float y, bool bol, float time) {
+    if(bol){
+    // set color to black
+    glColor3f(0.0, 0.0, 0.0);
+
+    // compute the bird's y position based on a sine wave
+    y = y - 2.5f * sin(time);
+
+    // draw the body
+    glBegin(GL_QUADS);
+    glVertex2f(x, y);
+    glVertex2f(x+0.5, y+0.5);
+    glVertex2f(x, y+0.20);
+    glVertex2f(x-0.5, y+0.5);
+    glEnd();
+    }
+
+
+}
+
+
+
+
+/// Function Morning
+void Morning(int _mor){
+
+    glClearColor (0.77, 0.95, 1.00, 1.0);
+    sun(true);
+
+    if(!night && !rainday){
+        glPushMatrix();
+        glTranslatef(position6, 0.0f, 0.0f);
+        bird(9.0, 14.0, true, glutGet(GLUT_ELAPSED_TIME) / 1000.0);
+        bird(8.8, 15.3, true, glutGet(GLUT_ELAPSED_TIME) / 1000.0);
+        bird(7.7, 15.9, true, glutGet(GLUT_ELAPSED_TIME) / 1000.0);
+        bird(7.5, 14.0, true, glutGet(GLUT_ELAPSED_TIME) / 1000.0);
+        bird(8.3, 15.6, true, glutGet(GLUT_ELAPSED_TIME) / 1000.0);
+        bird(7.2, 15.2, true, glutGet(GLUT_ELAPSED_TIME) / 1000.0);
+        bird(8.5, 14.2, true, glutGet(GLUT_ELAPSED_TIME) / 1000.0);
+        glPopMatrix();
+    }
+
+}
+
 //-------------Mubashir
 
 
@@ -201,17 +269,14 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     //-------------Zobayer
-    sun(true);
-    moon(true);
-
-
-    float theta;
 
 
     /// clouds
 
     glPushMatrix();
     glTranslatef(position1,0.0f, 0.0f);
+
+    float theta;
 
     //c1
     glBegin(GL_POLYGON);
@@ -359,7 +424,7 @@ void display(void)
 
     //-------------Zobayer
 
-    //buildings
+    ///Buildings
 	glBegin(GL_QUADS);
 
     glColor3f (0, 0, 0);
@@ -828,9 +893,15 @@ void display(void)
 
     //-------------Mubashir
 
+    /// Birds
+
+    Morning(_mor);
+
 
 glFlush ();
 }
+
+
 
 
 //-------------Zobayer
@@ -996,7 +1067,7 @@ void handleKeypress(unsigned char key, int x, int y)
         case 'm':
         rainday = false;
         night = false;
-        sun(true);
+        Morning(_mor);
         break;
 
 
@@ -1082,6 +1153,7 @@ int main(int argc, char** argv)
     glutTimerFunc(100, update2, 0);
     glutTimerFunc(100, update4, 0);
     glutTimerFunc(100, update5, 0);
+    glutTimerFunc(100, update6, 0);
 
     glutMainLoop();
     return 0;
