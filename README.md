@@ -9,9 +9,10 @@ A scenic view of Dhaka MRT-6 Metro Rail. Elements added in the project are -
   5. Footpath
   6. Cars
   7. Trees
-  8. Sun and Moon
-  9. Bat Signal
-  10. Metro Rail structures
+  8. Birds
+  9. Sun and Moon
+  10. Bat Signal
+  11. Metro Rail structures
  
 User Interactions are -
   1. Keyboard keypress input
@@ -19,3 +20,4 @@ User Interactions are -
   3. Speed control
   4. Weather control
   5. Vehicle manipulation 
+  6. Music Implementation
